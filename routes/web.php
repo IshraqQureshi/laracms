@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'guest', 'prefix' => 'sitecontrol','namespace' => 'Sitecontrol\Auth'], function(){
+
+    Route::get('/', 'LoginController@login')->name('login');
+    Route::post('/login', 'LoginController@getLogin')->name('get-login');
+
 });
