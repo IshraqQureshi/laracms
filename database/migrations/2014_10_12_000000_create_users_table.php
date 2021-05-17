@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->longText('address');
             $table->string('zipcode');
             $table->longText('forget_password_token')->nullable();
+            $table->longText('remember_token')->nullable();
             $table->timestamps();
         });
     }

@@ -1,0 +1,3 @@
+body .form-group[class*=has-icon-] .form-control-icon{
+  top: 25px
+}

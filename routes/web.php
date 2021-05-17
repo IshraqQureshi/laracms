@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'guest', 'prefix' => 'sitecontrol','namespace' => 'Sitecontrol\Auth'], function(){
 
     Route::get('/', 'LoginController@login')->name('login');
-    Route::post('/login', 'LoginController@getLogin')->name('get-login');
+    Route::post('/login', 'LoginController@getLogin')->name('getLogin');
+
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'sitecontrol','namespace' => 'Sitecontrol'], function(){
+
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+    Route::group(['prefix' => 'managedashboard','namespace' => 'Dashboard'], function(){
+        Route::get('/', 'Controls@index')->name('dashboard');    
+    });
 
 });
