@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sitecontrol\Setting;
 
 use Validator;
+use App\Enums\SettingKeys;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use App\Http\Helpers\GeneralHelper;
@@ -28,6 +29,34 @@ class Controls extends MyController
     {
         $this->data['view']                 = 'view';
         $this->data['page_title']           = 'Settings';
+
+        $site_settings                           = SiteSetting::get();
+        
+        foreach($site_settings as $site_setting)
+        {
+            if( $site_setting->setting_key == SettingKeys::__SITE_TITLE )
+            {
+                $settings['site_title']    =    $site_setting->setting_value;
+            }
+            if( $site_setting->setting_key == SettingKeys::__SITE_THEME )
+            {
+                $settings['site_theme']    =    $site_setting->setting_value;
+            }
+            if( $site_setting->setting_key == SettingKeys::__FONT_SIZES )
+            {
+                $settings['font_sizes']    =    $site_setting->setting_value;
+            }
+            if( $site_setting->setting_key == SettingKeys::__ADMIN_EMAIL )
+            {
+                $settings['admin_email']    =    $site_setting->setting_value;
+            }
+            if( $site_setting->setting_key == SettingKeys::__CC_EMAIL )
+            {
+                $settings['cc_emails']    =    $site_setting->setting_value;
+            }
+        }
+
+        $this->data['site_settings']        = $settings;
 
         return view(Config::get('constants.__SITECONTROL_TEMPLATE'), $this->data);
     }
@@ -72,6 +101,12 @@ class Controls extends MyController
             $save_data->setting_value           = $value;
 
             $save_data->save();
+
+            return redirect()->back()->with([
+                                    'message' => 'Settings saved successfully',
+                                    'type'    => 'success',
+                                    'title'   => 'Success'
+                                    ]);
         }
                 
 

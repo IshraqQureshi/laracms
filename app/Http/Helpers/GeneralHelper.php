@@ -37,4 +37,49 @@ class GeneralHelper{
     }
   }
 
+  /**
+   * 
+   * Set Input Values
+   * 
+   * @param string $field_name
+   * @param string $defult_value
+   * 
+   * @return string $value
+   * 
+   */
+  static function set_values($field_name = '', $defult_value = '')
+  {
+    if( old($field_name) != '' )
+    {
+      return old($field_name);
+    }
+
+    return $defult_value;
+  }
+
+
+  /**
+   * 
+   * Make slug for title
+   * 
+   * @param string $title
+   * @param Model $model
+   * @param int $id
+   * 
+   * @return string $slug
+   * 
+  */
+
+  static function make_slug($title, $model, $id = '')
+  {
+    $slug   = str_replace(' ', '-', strtolower($title));
+    
+    if( $model->where('slug', $slug)->count() > 0 )
+    {
+      $slug = $slug . '-' . $model->where('slug', $slug)->count();
+    }
+
+    return $slug;
+  }
+
 }

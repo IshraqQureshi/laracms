@@ -14,7 +14,10 @@
           <ul class="menu">
               
               {{-- Dashboard Item --}}
-              <li class="sidebar-item active ">
+              @php
+                $currentRouteName = Route::current()->getName();
+              @endphp
+              <li class="sidebar-item {{ $currentRouteName == 'dashboard' ? 'active' : '' }}">
                   <a href="{{ route('dashboard') }}" class='sidebar-link'>
                       <i class="bi bi-grid-fill"></i>
                       <span>Dashboard</span>
@@ -22,10 +25,19 @@
               </li>
               {{-- Dashboard Item --}}
 
+              {{-- Pages Item --}}
+              <li class="sidebar-item {{ $currentRouteName == 'pages' ? 'active' : '' }}">
+                <a href="{{ route('pages') }}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                    <span>Pages</span>
+                </a>
+              </li>
+              {{-- Setting Item --}}
+
               {{-- Settings Item --}}
-              <li class="sidebar-item  ">
+              <li class="sidebar-item {{ $currentRouteName == 'settings' ? 'active' : '' }}">
                 <a href="{{ route('settings') }}" class='sidebar-link'>
-                    <i class="bi bi-file-earmark-medical-fill"></i>
+                    <i class="bi bi-gear-fill"></i>
                     <span>Settings</span>
                 </a>
               </li>

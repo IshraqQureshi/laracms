@@ -1,3 +1,19 @@
 body .form-group[class*=has-icon-] .form-control-icon{
   top: 25px
 }
+
+.notification_messages {
+  position: fixed;
+  z-index: 9999999999;
+  right: 30px;
+  bottom: 0;
+  min-width: 480px;
+}
+
+.notification_messages .color-success{
+  color: #00974a;
+}
+
+.notification_messages .color-danger{
+  color: #f85757;
+}
