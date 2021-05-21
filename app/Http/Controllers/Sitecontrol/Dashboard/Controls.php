@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 
 class Controls extends MyController
 {
+    
     public function __construct()
     {
         parent::__construct();
@@ -15,6 +16,12 @@ class Controls extends MyController
         $this->data['view_directory']       = 'sitecontrol.managedashboard.';
     }
 
+    /** 
+     * 
+     * View Dashboard
+     * 
+     * @return view 
+    */
     public function index()
     {
         $this->data['view']                 = 'view';

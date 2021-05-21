@@ -233,6 +233,9 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+        'DropdownHelper'    => App\Http\Helpers\DropdownHelper::class,
+        'GeneralHelper'     => App\Http\Helpers\GeneralHelper::class,
+
     ],
 
 ];
