@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EnumSeeder::class,
             RoleSeeder::class,
-            UserRoleSeeder::class
+            UserRoleSeeder::class,
+            SiteSettingSeeder::class
         ]);
     }
 }

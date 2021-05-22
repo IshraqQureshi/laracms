@@ -17,9 +17,9 @@ class CreateContentsTable extends Migration
             $table->id();
             $table->bigInteger('content_type')->unsigned();
             $table->string('title');
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->string('slug');
-            $table->longText('featured_image');
+            $table->longText('featured_image')->nullable();
             $table->timestamps();
 
             $table->foreign('content_type')->references('id')->on('enum_content_types');

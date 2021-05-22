@@ -1,26 +1,28 @@
 <section class="section">
   <div class="card">
       <div class="card-body">
+          <div style="text-align: right;" class="mb-4">
+            <a href="{{ route('createPage') }}" class="btn btn-warning">Add Page</a>
+          </div>
           <table class="table table-striped" id="pages_table">
               <thead>
-                  <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>City</th>
-                      <th>Status</th>
-                  </tr>
+                    <tr>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th></th>
+                    </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Graiden</td>
-                  <td>vehicula.aliquet@semconsequat.co.uk</td>
-                  <td>076 4820 8838</td>
-                  <td>Offenburg</td>
-                  <td>
-                      <span class="badge bg-success">Active</span>
-                  </td>
-              </tr>
+                @foreach ($pages as $page)
+                    <tr>
+                        <td>{{ $page->title }}</td>
+                        <td>{{ $page->slug }}</td>
+                        <td style="text-align: right">
+                            <a href="{{ route('editPage', ['page_id' => $page->id]) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('deletePage', ['page_id' => $page->id]) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                @endforeach
               </tbody>
           </table>
       </div>

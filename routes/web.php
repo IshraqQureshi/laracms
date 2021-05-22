@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'sitecontrol','namespace' => '
             Route::get('/create', 'Controls@create')->name('createPage');
             Route::get('/edit/{page_id}', 'Controls@edit')->name('editPage');
             Route::post('/save', 'Controls@save')->name('savePage');
-            Route::delete('/delete/{page_id}', 'Controls@delete')->name('deletePage');
+            Route::get('/delete/{page_id}', 'Controls@delete')->name('deletePage');
         });
     // Manage Pages
 
