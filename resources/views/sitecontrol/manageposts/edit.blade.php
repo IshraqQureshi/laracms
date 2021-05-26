@@ -3,7 +3,7 @@
       <div class="col-md-12">
           <div class="card">
               <div class="card-body">
-                {!! Form::open(['url' => route('savePage'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['url' => route('savePost'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                   
                   <div class="row mb-4">
                     <div class="col-sm-12">
@@ -12,7 +12,7 @@
                             {!! Form::label('title', 'Title') !!}
                           </div>
                           <div class="col-lg-10 col-9">
-                            {{ Form::text('title', GeneralHelper::set_values('title', isset($page) ? $page->title : ''), array('class' => 'form-control round', 'placeholder' => 'Enter Title')) }}
+                            {{ Form::text('title', GeneralHelper::set_values('title', isset($post) ? $post->title : ''), array('class' => 'form-control round', 'placeholder' => 'Enter Title')) }}
                           </div>                  
                             @error('title')
                               <div class="col-lg-12 text-danger mt-2 text-end">  
@@ -30,7 +30,7 @@
                           {!! Form::label('content', 'Content') !!}
                         </div>
                         <div class="col-lg-10 col-9">
-                          {{ Form::textarea('content', GeneralHelper::set_values('content', isset($page) ? $page->content : ''), array('class' => 'form-control round', 'placeholder' => 'Enter Content')) }}
+                          {{ Form::textarea('content', GeneralHelper::set_values('content', isset($post) ? $post->content : ''), array('class' => 'form-control round', 'placeholder' => 'Enter Content')) }}
                         </div>                  
                           @error('content')
                             <div class="col-lg-12 text-danger mt-2 text-end">  
@@ -49,8 +49,8 @@
                         </div>
                         <div class="col-lg-10 col-9">
                           {{ Form::file('featured_image', array('class' => '')) }}
-                          @isset($page)
-                          <a href="{{url('/'. $page->featured_image)}}">{{url('/'. $page->featured_image)}}</a>
+                          @isset($post)
+                          <a href="{{url('/'. $post->featured_image)}}">{{url('/'. $post->featured_image)}}</a>
                           @endisset
                         </div>                  
                           @error('content')
@@ -64,8 +64,8 @@
 
                   <div class="row">
                     <div class="col-sm-12 d-flex justify-content-end">
-                      @isset($page)
-                        {{ Form::hidden('edit_id', $page->id) }}
+                      @isset($post)
+                        {{ Form::hidden('edit_id', $post->id) }}
                       @endisset
                       {{ Form::submit('Save', array('class' => 'btn btn-primary me-1 mb-1')) }}
                     </div>

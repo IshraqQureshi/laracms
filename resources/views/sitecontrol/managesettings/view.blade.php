@@ -3,7 +3,7 @@
       <div class="col-md-12">
           <div class="card">
               <div class="card-body">
-                {!! Form::open(['url' => route('saveSettings'), 'method' => 'post']) !!}
+                {!! Form::open(['url' => route('saveSettings'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                   <div class="row mb-4">
                     <div class="col-sm-12">
                         <div class="form-group row align-items-center">
@@ -88,6 +88,46 @@
                           @error('cc_emails')
                             <div class="col-lg-12 text-danger mt-2 text-end">  
                               {{ $errors->first('cc_emails') }}
+                            </div>
+                          @enderror
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <div class="form-group row align-items-center">
+                        <div class="col-lg-2 col-3">  
+                          {!! Form::label('home_page', 'Home Page') !!}
+                        </div>
+                        <div class="col-lg-10 col-9">
+                          {{ Form::select('home_page', DropdownHelper::pagesList(), GeneralHelper::set_values('home_page', isset($site_settings['home_page']) ? $site_settings['home_page'] : ''), array('class' => 'form-select')) }}
+                        </div>                  
+                          @error('cc_emails')
+                            <div class="col-lg-12 text-danger mt-2 text-end">  
+                              {{ $errors->first('home_page') }}
+                            </div>
+                          @enderror
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <div class="form-group row align-items-center">
+                        <div class="col-lg-2 col-3">  
+                          {!! Form::label('site_logo', 'Site Logo') !!}
+                        </div>
+                        <div class="col-lg-10 col-9">
+                          {{ Form::file('site_logo', array('class' => '')) }}
+                          
+                          @isset($site_settings['site_logo'])
+                          <a href="{{url('/'. $site_settings['site_logo'])}}">{{url('/'. $site_settings['site_logo'])}}</a>
+                          @endisset
+                        </div>                  
+                          @error('content')
+                            <div class="col-lg-12 text-danger mt-2 text-end">  
+                              {{ $errors->first('site_logo') }}
                             </div>
                           @enderror
                       </div>

@@ -29,7 +29,14 @@ class EnumSeeder extends Seeder
             ],
             [
                 'setting_key' => 'cc_emails'
-            ]
+            ],
+            [
+                'setting_key' => 'home_page'
+            ],
+            [
+                'setting_key' => 'site_logo'
+            ],
+
         ]);
 
         DB::table('enum_content_types')->insert([

@@ -7,6 +7,7 @@ use App\Enums\SettingKeys;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use App\Http\Helpers\GeneralHelper;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\MyController;
 use Illuminate\Support\Facades\Config;
 
@@ -54,6 +55,14 @@ class Controls extends MyController
             {
                 $settings['cc_emails']    =    $site_setting->setting_value;
             }
+            if( $site_setting->setting_key == SettingKeys::__HOME_PAGE )
+            {
+                $settings['home_page']    =    $site_setting->setting_value;
+            }
+            if( $site_setting->setting_key == SettingKeys::__SITE_LOGO )
+            {
+                $settings['site_logo']    =    $site_setting->setting_value;
+            }
         }
 
         $this->data['site_settings']        = $settings;
@@ -76,7 +85,9 @@ class Controls extends MyController
             'site_theme'    => 'required',
             'font_sizes'    => 'required',
             'admin_email'   => 'required|email',
-            'cc_emails'     => 'required|email'
+            'cc_emails'     => 'required|email',
+            'home_page'     => 'required',
+            'site_logo'     => 'required|mimes:jpg,jpeg,png',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -87,9 +98,23 @@ class Controls extends MyController
             return redirect()->back()->withInput()->withErrors($messages);
         }
         unset($request['_token']);
+
+        if($request->has('site_logo'))
+        {
+            $fileDirectory          = 'uploads';
+
+            $path = 'public/'.$fileDirectory;
+
+            File::isDirectory($path) or File::makeDirectory($path, 777, true, true);
+
+            $site_logo = $request->site_logo->store($path);
+        }
+
+       
         
         foreach( $request->all() as $key => $value )
         {
+            
             $save_data          = new SiteSetting();
 
             if( SiteSetting::where('setting_key', GeneralHelper::setting_keys_id($key))->first() )
@@ -98,16 +123,21 @@ class Controls extends MyController
             }
 
             $save_data->setting_key             = GeneralHelper::setting_keys_id($key);
-            $save_data->setting_value           = $value;
+            if($key === 'site_logo')
+            {
+                $save_data->setting_value           = $site_logo;   
+            }else{
+                $save_data->setting_value           = $value;
+            }
 
             $save_data->save();
-
-            return redirect()->back()->with([
-                                    'message' => 'Settings saved successfully',
-                                    'type'    => 'success',
-                                    'title'   => 'Success'
-                                    ]);
         }
+
+        return redirect()->back()->with([
+            'message' => 'Settings saved successfully',
+            'type'    => 'success',
+            'title'   => 'Success'
+            ]);
                 
 
     }

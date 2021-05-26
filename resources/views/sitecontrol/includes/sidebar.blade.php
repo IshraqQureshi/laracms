@@ -32,7 +32,25 @@
                     <span>Pages</span>
                 </a>
               </li>
-              {{-- Setting Item --}}
+              {{-- Pages Item --}}
+
+              {{-- Posts Item --}}
+              <li class="sidebar-item {{ $currentRouteName == 'posts' ? 'active' : '' }}">
+                <a href="{{ route('posts') }}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                    <span>Posts</span>
+                </a>
+              </li>
+              {{-- Posts Item --}}
+
+              {{-- Posts Item --}}
+              <li class="sidebar-item {{ $currentRouteName == 'categories' ? 'active' : '' }}">
+                <a href="{{ route('categories') }}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                    <span>Categories</span>
+                </a>
+              </li>
+              {{-- Posts Item --}}
 
               {{-- Settings Item --}}
               <li class="sidebar-item {{ $currentRouteName == 'settings' ? 'active' : '' }}">

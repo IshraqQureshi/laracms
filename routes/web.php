@@ -52,5 +52,33 @@ Route::group(['middleware' => 'auth', 'prefix' => 'sitecontrol','namespace' => '
         });
     // Manage Pages
 
+    // Manage Posts
+        Route::group(['prefix' => 'manageposts','namespace' => 'Posts'], function(){
+            Route::get('/', 'Controls@index')->name('posts');
+            Route::get('/create', 'Controls@create')->name('createPost');
+            Route::get('/edit/{post_id}', 'Controls@edit')->name('editPost');
+            Route::post('/save', 'Controls@save')->name('savePost');
+            Route::get('/delete/{post_id}', 'Controls@delete')->name('deletePost');
+        });
+    // Manage Posts
+
+    // Manage Categories
+        Route::group(['prefix' => 'managecategories','namespace' => 'Categories'], function(){
+            Route::get('/', 'Controls@index')->name('categories');
+            Route::get('/create', 'Controls@create')->name('createCategory');
+            Route::get('/edit/{category_id}', 'Controls@edit')->name('editCategory');
+            Route::post('/save', 'Controls@save')->name('saveCategory');
+            Route::get('/delete/{category_id}', 'Controls@delete')->name('deleteCategory');
+        });
+    // Manage Categories
+
 });
 // Admin Routes
+
+// Frontend Routes
+Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function(){
+
+    Route::get('/', 'HomepageController@index')->name('hompage');
+
+});
+// Frontend Routes

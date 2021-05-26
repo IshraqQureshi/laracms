@@ -35,6 +35,14 @@ class GeneralHelper{
     {
       return SettingKeys::__CC_EMAIL;
     }
+    elseif ( $setting_key == 'home_page' )
+    {
+      return SettingKeys::__HOME_PAGE;
+    }
+    elseif ( $setting_key == 'site_logo' )
+    {
+      return SettingKeys::__SITE_LOGO;
+    }
   }
 
   /**
