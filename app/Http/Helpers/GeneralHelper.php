@@ -2,7 +2,10 @@
 
 namespace App\Http\Helpers;
 
+use App\Models\Content;
 use App\Enums\SettingKeys;
+use App\Enums\ContentTypes;
+use App\Models\SiteSetting;
 
 class GeneralHelper{
 
@@ -88,6 +91,49 @@ class GeneralHelper{
     }
 
     return $slug;
+  }
+
+  /**
+   * 
+   * Get Site Theme Value
+   * 
+   * @return string $site_theme
+   */
+
+   static function getSiteTheme()
+   {
+     $site_theme    = SiteSetting::where('setting_key', SettingKeys::__SITE_THEME)->first();
+
+     return $site_theme->setting_value;
+   }
+
+   /**
+   * 
+   * Get Site Navigation
+   * 
+   * @return collection $content_navigation
+   */
+
+  static function getSiteNavigation()
+  {
+    $content_navigation    = Content::select('id', 'title', 'slug')->where('content_type', ContentTypes::__PAGE)->get();
+    return $content_navigation;
+  }
+
+  static function getSiteFontSize()
+  {
+    $font_size    = SiteSetting::where('setting_key', SettingKeys::__FONT_SIZES)->first();
+
+    if( $font_size->setting_value == 'small' )
+    {
+      return "12px";
+    }elseif($font_size->setting_value == 'medium')
+    {
+      return "16px";
+    }elseif($font_size->setting_value == 'large')
+    {
+      return "20px";
+    }
   }
 
 }

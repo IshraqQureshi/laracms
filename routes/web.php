@@ -80,5 +80,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function(){
 
     Route::get('/', 'HomepageController@index')->name('hompage');
 
+    Route::get('/{slug}', 'ContentController@page')->name('content_page');
+
 });
 // Frontend Routes

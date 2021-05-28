@@ -87,7 +87,7 @@ class Controls extends MyController
             'admin_email'   => 'required|email',
             'cc_emails'     => 'required|email',
             'home_page'     => 'required',
-            'site_logo'     => 'required|mimes:jpg,jpeg,png',
+            'site_logo'     => 'mimes:jpg,jpeg,png',
         ];
 
         $validator = Validator::make($request->all(), $rules);
