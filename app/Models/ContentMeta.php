@@ -9,4 +9,9 @@ class ContentMeta extends Model
 {
     use HasFactory;
     protected $fillable = ['content_id', 'content_group_id'];
+
+    public function content()
+    {
+        return $this->belongsTo(Content::class);
+    }
 }
